@@ -240,18 +240,29 @@ socket.on("guess", ({ roomId, guess }) => {
   room.canvasHistory.push({ type, data });
   socket.to(roomId).emit("draw_data", { type, data });
 });
-   socket.on("draw_undo", ({ roomId }) => {
 
+socket.on("draw_undo", ({ roomId }) => {
   const room = getRoom(roomId);
   if (!room || !room.canvasHistory || room.canvasHistory.length === 0) return;
 
-  // Remove last stroke
-  room.canvasHistory.pop();
+  // Find the index of the last "start" event
+  let lastStartIndex = -1;
+  for (let i = room.canvasHistory.length - 1; i >= 0; i--) {
+    if (room.canvasHistory[i].type === "start") {
+      lastStartIndex = i;
+      break;
+    }
+  }
 
-  // Send updated history to all players
+  // Remove everything from that "start" to the end of the array
+  if (lastStartIndex !== -1) {
+    room.canvasHistory.splice(lastStartIndex);
+  }
+
+  // Broadcast the fixed history to everyone
   io.to(roomId).emit("canvas_sync", room.canvasHistory);
-
 });
+
     socket.on("canvas_clear", ({ roomId }) => {
       const room = getRoom(roomId);
       if (room) {

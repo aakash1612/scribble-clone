@@ -79,16 +79,32 @@ const handleDrawData = (payload) => {
     };
 
 const handleCanvasSync = (history) => {
-
   const canvas = canvasRef.current;
   const ctx = canvas.getContext("2d");
 
+  // 1. Clear the drawer's screen
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  history.forEach(event => {
-    handleDrawData(event);
-  });
+  // 2. Directly draw the history without triggering the socket guard
+  history.forEach((payload) => {
+    const { type, data } = payload;
 
+    if (type === "start") {
+      ctx.beginPath();
+      ctx.strokeStyle = data.color;
+      ctx.lineWidth = data.size;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.moveTo(data.x, data.y);
+    } 
+    else if (type === "move") {
+      ctx.lineTo(data.x, data.y);
+      ctx.stroke();
+    } 
+    else if (type === "end") {
+      ctx.closePath();
+    }
+  });
 };
 
     socket.on("draw_data", handleDrawData);
