@@ -1,0 +1,181 @@
+/* ---------- MAIN CONTAINER ---------- */
+
+.lobby-container{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* ---------- CARD ---------- */
+
+.lobby-card{
+  background:white;
+  width:420px;
+  padding:35px;
+  border-radius:14px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.25);
+  text-align:center;
+  animation:fadeIn 0.4s ease;
+}
+
+
+/* ---------- TITLE ---------- */
+
+.lobby-title{
+  margin-bottom:15px;
+  font-size:26px;
+  font-weight:700;
+  color:#333;
+}
+
+
+/* ---------- ROOM ID ---------- */
+
+.room-id{
+  background:#f4f6f8;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:20px;
+  font-weight:600;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+.room-id span{
+  color:#667eea;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+
+/* ---------- COPY BUTTON ---------- */
+
+.copy-btn{
+  padding:5px 10px;
+  border:none;
+  border-radius:6px;
+  background:#667eea;
+  color:white;
+  font-size:13px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.copy-btn:hover{
+  background:#5566d1;
+  transform:scale(1.05);
+}
+
+
+/* ---------- PLAYER TITLE ---------- */
+
+.player-title{
+  margin-bottom:10px;
+  font-size:18px;
+  font-weight:600;
+  color:#444;
+}
+
+
+/* ---------- PLAYER LIST ---------- */
+
+.players-list{
+  margin-bottom:25px;
+  max-height:200px;
+  overflow-y:auto;
+}
+
+
+/* ---------- PLAYER ITEM ---------- */
+
+.player-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:#f9fafc;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:8px;
+  transition:0.2s;
+}
+
+.player-item:hover{
+  background:#eef1ff;
+  transform:translateY(-1px);
+}
+
+
+/* ---------- AVATAR ---------- */
+
+.avatar{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  background:#667eea;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:bold;
+  font-size:15px;
+  box-shadow:0 3px 6px rgba(0,0,0,0.15);
+}
+
+
+/* ---------- START BUTTON ---------- */
+
+.start-btn{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:8px;
+  background:#28a745;
+  color:white;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.start-btn:hover{
+  background:#1f8a38;
+  transform:translateY(-1px);
+}
+
+.start-btn:disabled{
+  background:#ccc;
+  cursor:not-allowed;
+  transform:none;
+}
+
+
+/* ---------- SCROLLBAR ---------- */
+
+.players-list::-webkit-scrollbar{
+  width:6px;
+}
+
+.players-list::-webkit-scrollbar-thumb{
+  background:#ccc;
+  border-radius:5px;
+}
+
+
+/* ---------- ANIMATION ---------- */
+
+@keyframes fadeIn{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
