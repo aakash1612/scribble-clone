@@ -78,23 +78,27 @@ const handleDrawData = (payload) => {
       if (strokes.current) strokes.current = [];
     };
 
-    const handleCanvasSync = (history) => {
-      if (isDrawer) return; // Only sync for guessers
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      history.forEach((stroke) => {
-        handleDrawData(stroke);
-      });
-    };
+const handleCanvasSync = (history) => {
+
+  const canvas = canvasRef.current;
+  const ctx = canvas.getContext("2d");
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  history.forEach(event => {
+    handleDrawData(event);
+  });
+
+};
 
     socket.on("draw_data", handleDrawData);
     socket.on("canvas_clear", handleClear);
     socket.on("canvas_sync", handleCanvasSync);
 
     return () => {
-      socket.off("draw_data");
-      socket.off("canvas_clear");
-      socket.off("canvas_sync");
+socket.off("draw_data", handleDrawData);
+socket.off("canvas_clear", handleClear);
+socket.off("canvas_sync", handleCanvasSync);
     };
   }, [isDrawer]); // Added isDrawer as dependency
 

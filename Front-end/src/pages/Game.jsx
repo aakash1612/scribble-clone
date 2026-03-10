@@ -157,11 +157,11 @@ function Game() {
 
         <div className="hint-section">
 
-         {!isDrawer && wordOptions.length > 0 ? (
-         <span className="waiting-text anim-pulse">
-           Drawer is choosing a word...
-           </span>
-            ) : (
+         {!isDrawer && hint === "" && time === selectTime ? (
+  <span className="waiting-text anim-pulse">
+    Drawer is choosing a word...
+  </span>
+) : (
 
             <span className="hint-text">
 

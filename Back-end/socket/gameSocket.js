@@ -240,7 +240,18 @@ socket.on("guess", ({ roomId, guess }) => {
   room.canvasHistory.push({ type, data });
   socket.to(roomId).emit("draw_data", { type, data });
 });
+   socket.on("draw_undo", ({ roomId }) => {
 
+  const room = getRoom(roomId);
+  if (!room || !room.canvasHistory || room.canvasHistory.length === 0) return;
+
+  // Remove last stroke
+  room.canvasHistory.pop();
+
+  // Send updated history to all players
+  io.to(roomId).emit("canvas_sync", room.canvasHistory);
+
+});
     socket.on("canvas_clear", ({ roomId }) => {
       const room = getRoom(roomId);
       if (room) {
