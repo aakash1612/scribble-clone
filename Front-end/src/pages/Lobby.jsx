@@ -55,9 +55,14 @@ function Lobby() {
 
   };
 
-  const startGame = () => {
-    socket.emit("start_game", { roomId });
-  };
+const startGame = () => {
+  if (players.length < 2) {
+    alert("Need at least 2 players");
+    return;
+  }
+
+  socket.emit("start_game", { roomId });
+};
 
   return (
 

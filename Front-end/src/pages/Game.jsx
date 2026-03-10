@@ -53,8 +53,8 @@ function Game() {
 
       if(data.drawTime){
         setTime(data.drawTime);
-  setTotalTime(data.drawTime);
-  setTimerKey(prev => prev + 1);
+        setTotalTime(data.drawTime);
+        setTimerKey(prev => prev + 1);
       }
     };
 
@@ -85,7 +85,7 @@ function Game() {
     socket.on("round_end", handleRoundEnd);
     socket.on("game_over", handleGameOver);
     socket.on("game_state", handleGameState);
-
+    
     socket.emit("get_game_state",{ roomId });
 
     return ()=>{

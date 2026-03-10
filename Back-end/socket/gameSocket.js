@@ -42,12 +42,19 @@ function setupGameSocket(io) {
     }
 
     // Delay before next round starts
-    setTimeout(() => {
-      const updatedRoom = getRoom(roomId);
-      if (updatedRoom && updatedRoom.players.length > 1) {
-        startRound(roomId, updatedRoom);
-      }
-    }, 4000);
+setTimeout(() => {
+  const updatedRoom = getRoom(roomId);
+
+  if (
+    updatedRoom &&
+    updatedRoom.players.length > 1 &&
+    updatedRoom.gameStarted &&
+    updatedRoom.round <= updatedRoom.settings.rounds
+  ) {
+    startRound(roomId, updatedRoom);
+  }
+
+}, 4000);
   }
 
   function startHintTimer(roomId, room) {
